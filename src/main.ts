@@ -4,9 +4,10 @@
  * @Autor: boide gui
  * @Date: 2020-12-30 12:08:32
  * @LastEditors: boide gui
- * @LastEditTime: 2020-12-31 15:32:07
+ * @LastEditTime: 2020-12-31 15:51:30
  */
 import { NestFactory } from '@nestjs/core';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as serveStatic from 'serve-static';
 import { NestExpressApplication } from '@nestjs/platform-express';
@@ -24,6 +25,17 @@ async function bootstrap() {
     maxAge: '1d',
     extensions: ['jpg', 'jpeg', 'png', 'gif'],
   }));
+
+  // swagger配置
+  const options = new DocumentBuilder()
+    .setTitle('Nodejs + Vuejs 全栈项目-后台管理API')
+    .setDescription('供后台管理界面调用的服务端API')
+    .setVersion('1.0')
+    // .addTag('cats')
+    .build();
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('api', app, document);
+
   await app.listen(3000);
 }
 bootstrap();

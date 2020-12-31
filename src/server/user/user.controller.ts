@@ -4,12 +4,14 @@
  * @Autor: boide gui
  * @Date: 2020-12-30 16:09:46
  * @LastEditors: boide gui
- * @LastEditTime: 2020-12-30 19:11:47
+ * @LastEditTime: 2020-12-31 17:18:49
  */
 import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
 import { UserService } from './user.service';
+import { ApiTags, ApiParam, ApiBody } from '@nestjs/swagger';
 import { IHttpData, UserData } from '../../utils/relust'
 
+@ApiTags('用户接口')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) { }
@@ -28,6 +30,10 @@ export class UserController {
 
   // 根据id用户信息
   @Get(':id')
+  @ApiParam({
+    name: 'id',
+    description: '这是用户id'
+  })
   async getById(@Param('id') id: number): Promise<IHttpData> {
     const data: any = await this.userService.getById(id);
     const result: IHttpData = {
@@ -40,6 +46,7 @@ export class UserController {
 
   // 新增用户信息
   @Post('add')
+  @ApiBody({type: UserData})
   async addUser(@Body() userData: UserData): Promise<IHttpData> {
     this.userService.create(userData);
     const result: IHttpData = {
@@ -64,6 +71,10 @@ export class UserController {
 
   // 删除用户用户信息
   @Delete(':id')
+  @ApiParam({
+    name: 'id',
+    description: '这是用户id'
+  })
   async deleteUser(@Param('id') id: number): Promise<IHttpData> {
     this.userService.delete(id);
     const result: IHttpData = {

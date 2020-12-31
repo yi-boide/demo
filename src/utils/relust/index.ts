@@ -4,8 +4,9 @@
  * @Autor: boide gui
  * @Date: 2020-12-22 15:11:31
  * @LastEditors: boide gui
- * @LastEditTime: 2020-12-30 18:26:38
+ * @LastEditTime: 2020-12-31 16:44:41
  */
+import { ApiProperty } from '@nestjs/swagger';
 export interface IHttp<T = any> {
     header: any,
     config: any,
@@ -24,10 +25,14 @@ export interface IHttpData<T = any> {
     msg: string,
     data: T
 }
-export interface UserData {
-  id?: number,
-  name: string,
-  phone?: string,
+export class UserData {
+  @ApiProperty({ description: '用户id,创建用户不传' })
+  id?: number
+  @ApiProperty({ description: '用户名' })
+  name: string
+  @ApiProperty({ description: '用户手机号' })
+  phone?: string
+  @ApiProperty({ description: '用户性别' })
   sex: number
 }
 
