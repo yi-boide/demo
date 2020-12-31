@@ -1,8 +1,29 @@
+/*
+ * @Descriptin: 
+ * @Version: 0.1
+ * @Autor: boide gui
+ * @Date: 2020-12-30 12:08:32
+ * @LastEditors: boide gui
+ * @LastEditTime: 2020-12-31 15:32:07
+ */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import * as serveStatic from 'serve-static';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  // 处理跨域
+  app.enableCors();
+
+  // '/public' 是路由名称，即你访问的路径为：host/public
+  // serveStatic 为 serve-static 导入的中间件，其中'../public' 为本项目相对于src目录的绝对地址
+  app.use('/public', serveStatic(join(__dirname, '../public'), {
+    maxAge: '1d',
+    extensions: ['jpg', 'jpeg', 'png', 'gif'],
+  }));
   await app.listen(3000);
 }
 bootstrap();
