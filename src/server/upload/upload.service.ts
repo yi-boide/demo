@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2020-12-31 13:15:30
  * @LastEditors: boide gui
- * @LastEditTime: 2020-12-31 19:32:25
+ * @LastEditTime: 2020-12-31 19:34:44
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -52,7 +52,7 @@ export class UploadService {
       uploadData.type = upload_dir_type
       uploadData.path = file_path
       uploadData.pathLocal = target_file_path
-      uploadData.pathUrl = 'http://www.wisdoms.xin' + file_path
+      uploadData.pathUrl = 'http://node.wisdoms.xin' + file_path
       uploadData.size = file.size
       uploadData.createTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
       await this.upoladRepository.save(uploadData);
