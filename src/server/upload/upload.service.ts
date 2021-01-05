@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2020-12-31 13:15:30
  * @LastEditors: boide gui
- * @LastEditTime: 2020-12-31 19:34:44
+ * @LastEditTime: 2021-01-05 17:36:20
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -42,13 +42,23 @@ export class UploadService {
       const relative_dir_path = `/public/${upload_dir_type}/${today}/`;
       const target_dir_path = join(__dirname, '../../..', relative_dir_path);
       await mkdirp(target_dir_path)
-      const file_path = relative_dir_path + file.originalname
-      const target_file_path = target_dir_path + file.originalname
+      let file_path = relative_dir_path + file.originalname
+      let target_file_path = target_dir_path + file.originalname
+      const pathBool = await fs.existsSync(target_file_path)
+      let clientID = '';
+      let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      for (let i = 0; i < 8; i++) {
+        clientID += possible.charAt((Math.random() * possible.length) | 0);
+      }
+      if (pathBool) {
+        file_path = relative_dir_path + clientID + file.originalname
+        target_file_path = target_dir_path + clientID + file.originalname
+      }
       const writeMusicCover = fs.createWriteStream(target_file_path)
       writeMusicCover.write(file.buffer)
       // 存数据库
       let uploadData = new Upload();
-      uploadData.name = file.originalname
+      uploadData.name = pathBool ? clientID + file.originalname : file.originalname
       uploadData.type = upload_dir_type
       uploadData.path = file_path
       uploadData.pathLocal = target_file_path
