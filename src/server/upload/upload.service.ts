@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2020-12-31 13:15:30
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-06 16:52:04
+ * @LastEditTime: 2021-01-06 18:48:46
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,7 +13,7 @@ import * as fs from 'fs';
 import * as moment from 'moment';
 import { mkdirp } from 'mz-modules';
 import { Repository } from 'typeorm';
-import { Upload } from './upload.entity';
+import { Upload } from './Upload.entity';
 
 @Injectable()
 export class UploadService {
