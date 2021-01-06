@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2020-12-30 12:08:32
  * @LastEditors: boide gui
- * @LastEditTime: 2020-12-31 19:28:27
+ * @LastEditTime: 2021-01-06 13:39:17
  */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
@@ -13,8 +13,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 // 子模块加载
 import { UserModule } from './server/user/user.module';
 import { UploadModule } from './server/upload/upload.module';
-import { ConfigController } from './server/config/config.controller';
-import { ConfigService } from './server/config/config.service';
 import { ConfigModule } from './server/config/config.module';
 @Module({
   imports: [
@@ -33,7 +31,7 @@ import { ConfigModule } from './server/config/config.module';
     UploadModule,
     ConfigModule,
   ],
-  controllers: [AppController, ConfigController],
-  providers: [AppService, ConfigService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

@@ -4,10 +4,10 @@
  * @Autor: boide gui
  * @Date: 2020-12-30 16:51:14
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-06 11:59:46
+ * @LastEditTime: 2021-01-06 13:34:03
  */
 
-export class UserEntity {
+export class configDao {
   id?: number;
   websiteName?: string;
   logo?: string;

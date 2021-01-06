@@ -4,12 +4,12 @@
  * @Autor: boide gui
  * @Date: 2020-12-30 16:51:14
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-06 13:27:33
+ * @LastEditTime: 2021-01-06 13:34:18
  */
 import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
 
 @Entity()
-export class UserEntity extends BaseEntity {
+export class Config extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

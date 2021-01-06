@@ -4,14 +4,13 @@
  * @Autor: boide gui
  * @Date: 2020-12-31 13:15:53
  * @LastEditors: boide gui
- * @LastEditTime: 2020-12-31 16:17:29
+ * @LastEditTime: 2021-01-06 14:02:06
  */
 import {
   Controller,
   Post,
   UseInterceptors,
   UploadedFiles,
-  Body,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiTags, ApiProperty, ApiConsumes, ApiBody } from '@nestjs/swagger';
@@ -37,7 +36,7 @@ export class UploadController {
     description: '选择文件',
     type: FilesUploadDto,
   })
-  async UploadedFile(@UploadedFiles() files, @Body() body): Promise<IHttpData> {
+  async UploadedFile(@UploadedFiles() files): Promise<IHttpData> {
     const result: IHttpData = {
       code: 0,
       data: null,
@@ -48,7 +47,7 @@ export class UploadController {
       result.msg = '未选择文件';
       return result;
     }
-    const data = await this.uploadService.create(files, body);
+    const data = await this.uploadService.create(files);
     result.code = 0;
     result.data = data;
     result.msg = '上传成功';

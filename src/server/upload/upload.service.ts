@@ -4,14 +4,14 @@
  * @Autor: boide gui
  * @Date: 2020-12-31 13:15:30
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-05 17:36:20
+ * @LastEditTime: 2021-01-06 13:45:36
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { join } from 'path';
 import * as fs from 'fs';
 import * as moment from 'moment';
-import { pump, mkdirp } from 'mz-modules';
+import { mkdirp } from 'mz-modules';
 import { Repository } from 'typeorm';
 import { Upload } from './Upload.entity';
 
@@ -29,7 +29,7 @@ export class UploadService {
   }
 
   // 创建文件
-  async create(files: Array<any>, data: any) {
+  async create(files: Array<any>) {
     const fileArr = [];
     for (const file of files) {
       console.log(file);
@@ -39,7 +39,7 @@ export class UploadService {
       const imgReg = /image/gi;
       const upload_dir_type = imgReg.test(file_type) ? 'img' : 'file';
       const today = moment().format('YYYY-MM-DD');
-      const relative_dir_path = `/public/${upload_dir_type}/${today}/`;
+      const relative_dir_path = `/static/${upload_dir_type}/${today}/`;
       const target_dir_path = join(__dirname, '../../..', relative_dir_path);
       await mkdirp(target_dir_path);
       let file_path = relative_dir_path + file.originalname;
