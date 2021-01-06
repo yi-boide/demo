@@ -6,11 +6,17 @@
  * @LastEditors: boide gui
  * @LastEditTime: 2020-12-31 16:17:29
  */
-import { Controller, Post, UseInterceptors, UploadedFiles, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  UseInterceptors,
+  UploadedFiles,
+  Body,
+} from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiTags, ApiProperty, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { UploadService } from './upload.service';
-import { IHttpData } from '../../utils/relust'
+import { IHttpData } from '../../utils/relust';
 class FilesUploadDto {
   @ApiProperty({ type: 'array', items: { type: 'string', format: 'binary' } })
   file: any[];
@@ -19,7 +25,7 @@ class FilesUploadDto {
 @ApiTags('文件接口')
 @Controller('upload')
 export class UploadController {
-  constructor(private readonly uploadService: UploadService) { }
+  constructor(private readonly uploadService: UploadService) {}
 
   // 支持上传多个文件
   @Post()
@@ -31,21 +37,21 @@ export class UploadController {
     description: '选择文件',
     type: FilesUploadDto,
   })
-  async UploadedFile(@UploadedFiles() files, @Body() body): Promise<IHttpData>{
-    let result: IHttpData = {
+  async UploadedFile(@UploadedFiles() files, @Body() body): Promise<IHttpData> {
+    const result: IHttpData = {
       code: 0,
       data: null,
-      msg: ''
-    }
+      msg: '',
+    };
     if (!files || files.length === 0) {
-      result.code = -1
-      result.msg = '未选择文件'
-      return result
+      result.code = -1;
+      result.msg = '未选择文件';
+      return result;
     }
-    const data = await this.uploadService.create(files, body)
-    result.code = 0
-    result.data = data
-    result.msg = '上传成功'
-    return result
+    const data = await this.uploadService.create(files, body);
+    result.code = 0;
+    result.data = data;
+    result.msg = '上传成功';
+    return result;
   }
 }

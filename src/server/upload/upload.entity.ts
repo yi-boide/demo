@@ -14,24 +14,23 @@ export class Upload extends BaseEntity {
   id: number;
 
   @Column()
-  name: String;
+  name: string;
 
   @Column()
-  path: String;
+  path: string;
 
-  @Column({default: null, name: 'path_local'})
-  pathLocal: String;
+  @Column({ default: null, name: 'path_local' })
+  pathLocal: string;
 
-  @Column({default: null, name: 'path_url'})
-  pathUrl?: String;
+  @Column({ default: null, name: 'path_url' })
+  pathUrl?: string;
 
-  @Column({default: null})
+  @Column({ default: null })
   size?: number;
 
-  @Column({default: null})
-  type?: String;
+  @Column({ default: null })
+  type?: string;
 
-  @Column({type:'datetime', name: 'create_time'})
-  createTime: String;
-
+  @Column({ type: 'datetime', name: 'create_time' })
+  createTime: string;
 }

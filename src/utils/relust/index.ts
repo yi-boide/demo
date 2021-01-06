@@ -8,43 +8,42 @@
  */
 import { ApiProperty } from '@nestjs/swagger';
 export interface IHttp<T = any> {
-    header: any,
-    config: any,
-    request: any,
-    data: {
-        code: number,
-        msg: string,
-        data: T | null
-    }
+  header: any;
+  config: any;
+  request: any;
+  data: {
+    code: number;
+    msg: string;
+    data: T | null;
+  };
 }
 
-export type IHttpResult<T> = Promise<IHttp<T>>
+export type IHttpResult<T> = Promise<IHttp<T>>;
 
 export interface IHttpData<T = any> {
-    code: number,
-    msg: string,
-    data: T
+  code: number;
+  msg: string;
+  data: T;
 }
 export class UserData {
   @ApiProperty({ description: '用户id,创建用户不传' })
-  id?: number
+  id?: number;
   @ApiProperty({ description: '用户名' })
-  name: string
+  name: string;
   @ApiProperty({ description: '用户手机号' })
-  phone?: string
+  phone?: string;
   @ApiProperty({ description: '用户性别' })
-  sex: number
+  sex: number;
 }
 
 export interface ICommonListContainer<T = any> {
-    list: T[],
-    pageNum: number,
-    pageSize: number,
-    pages: number,
-    total: number,
+  list: T[];
+  pageNum: number;
+  pageSize: number;
+  pages: number;
+  total: number;
 
-
-    /*endRow?: number,
+  /*endRow?: number,
     firstPage?: number,
     hasNextPage?: boolean,
     hasPreviousPage?: boolean,
@@ -61,18 +60,20 @@ export interface ICommonListContainer<T = any> {
     prePage?: number,
     size?: number,
     startRow?: number,*/
-
 }
-
 
 export interface IRulesItem {
-    required?: boolean,
-    msg?: string,
-    trigger?: 'change' | 'blur',
-    min?: number,
-    max?: number,
-    type?: 'array' | 'date' | 'string' | 'number',
-    validator?: (rule: IRulesItem, value: string | number, cb: (error?: Error) => void) => void
+  required?: boolean;
+  msg?: string;
+  trigger?: 'change' | 'blur';
+  min?: number;
+  max?: number;
+  type?: 'array' | 'date' | 'string' | 'number';
+  validator?: (
+    rule: IRulesItem,
+    value: string | number,
+    cb: (error?: Error) => void,
+  ) => void;
 }
 
-export type IRules = { [key: string]: IRulesItem[] }
+export type IRules = { [key: string]: IRulesItem[] };

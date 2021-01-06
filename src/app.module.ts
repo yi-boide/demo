@@ -1,5 +1,5 @@
 /*
- * @Descriptin: 
+ * @Descriptin:
  * @Version: 0.1
  * @Autor: boide gui
  * @Date: 2020-12-30 12:08:32
@@ -31,7 +31,7 @@ import { ConfigModule } from './server/config/config.module';
     }),
     UserModule,
     UploadModule,
-    ConfigModule
+    ConfigModule,
   ],
   controllers: [AppController, ConfigController],
   providers: [AppService, ConfigService],

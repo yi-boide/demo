@@ -13,6 +13,6 @@ export class UserEntity {
   logo?: string;
   notice?: string;
   about?: string;
-  createTime?: String;
-  updateTime?: String | null;
+  createTime?: string;
+  updateTime?: string | null;
 }

@@ -13,8 +13,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Upload } from './Upload.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Upload])],
+  imports: [TypeOrmModule.forFeature([Upload])],
   controllers: [UploadController],
-  providers: [UploadService]
+  providers: [UploadService],
 })
 export class UploadModule {}
