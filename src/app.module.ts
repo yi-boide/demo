@@ -13,6 +13,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 // 子模块加载
 import { UserModule } from './server/user/user.module';
 import { UploadModule } from './server/upload/upload.module';
+import { ConfigController } from './server/config/config.controller';
+import { ConfigService } from './server/config/config.service';
+import { ConfigModule } from './server/config/config.module';
 @Module({
   imports: [
     // 加载连接数据库
@@ -27,9 +30,10 @@ import { UploadModule } from './server/upload/upload.module';
       synchronize: true, // 定义数据库表结构与实体类字段同步(这里一旦数据库少了字段就会自动加入,根据需要来使用)
     }),
     UserModule,
-    UploadModule
+    UploadModule,
+    ConfigModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ConfigController],
+  providers: [AppService, ConfigService],
 })
 export class AppModule {}

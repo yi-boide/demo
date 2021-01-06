@@ -1,7 +1,16 @@
+/*
+ * @Descriptin: eslint配置
+ * @Version: 0.1
+ * @Autor: boide gui
+ * @Date: 2020-12-30 12:08:32
+ * @LastEditors: boide gui
+ * @LastEditTime: 2021-01-06 13:21:26
+ */
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.json',
+    tsconfigRootDir: __dirname,
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
