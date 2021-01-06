@@ -4,13 +4,13 @@
  * @Autor: boide gui
  * @Date: 2020-12-31 13:16:49
  * @LastEditors: boide gui
- * @LastEditTime: 2020-12-31 13:35:25
+ * @LastEditTime: 2021-01-06 14:31:24
  */
 import { Module } from '@nestjs/common';
 import { UploadController } from './upload.controller';
 import { UploadService } from './upload.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Upload } from './Upload.entity';
+import { Upload } from './upload.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Upload])],
