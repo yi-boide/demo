@@ -4,13 +4,13 @@
  * @Autor: boide gui
  * @Date: 2020-12-30 16:11:29
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-06 13:25:23
+ * @LastEditTime: 2021-01-07 17:39:34
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './user.entity';
-import { UserData } from '../../utils/relust';
+import { UserDao } from './user.dao';
 @Injectable()
 export class UserService {
   // 使用InjectRepository装饰器并引入Repository这样就可以使用typeorm的操作了
@@ -25,7 +25,7 @@ export class UserService {
   }
 
   // 创建用户
-  async create(data: UserData) {
+  async create(data: UserDao) {
     const userData = new UserEntity();
     userData.name = data.name;
     userData.phone = data.phone;
@@ -35,7 +35,7 @@ export class UserService {
   }
 
   // 修改用户
-  async update(data: UserData) {
+  async update(data: UserDao) {
     const userData = await this.userRepository.findOne(data.id);
     userData.name = data.name;
     userData.phone = data.phone;

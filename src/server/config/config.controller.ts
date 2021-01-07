@@ -4,13 +4,13 @@
  * @Autor: boide gui
  * @Date: 2021-01-06 11:43:22
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-06 13:59:30
+ * @LastEditTime: 2021-01-07 17:37:39
  */
 import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
 import { ConfigService } from './config.service';
 import { ApiTags, ApiParam, ApiBody } from '@nestjs/swagger';
 import { IHttpData } from '../../utils/relust';
-import { configDao } from './config.entityDao';
+import { ConfigDao } from './config.dao';
 
 @ApiTags('配置接口')
 @Controller('config')
@@ -47,8 +47,8 @@ export class ConfigController {
 
   // 新增配置信息
   @Post('add')
-  @ApiBody({ type: configDao })
-  async addConfig(@Body() configDao: configDao): Promise<IHttpData> {
+  @ApiBody({ type: ConfigDao })
+  async addConfig(@Body() configDao: ConfigDao): Promise<IHttpData> {
     this.configService.add(configDao);
     const result: IHttpData = {
       code: 0,
@@ -60,7 +60,7 @@ export class ConfigController {
 
   // 修改配置信息
   @Post('update')
-  async updateConfig(@Body() configDao: configDao): Promise<IHttpData> {
+  async updateConfig(@Body() configDao: ConfigDao): Promise<IHttpData> {
     this.configService.update(configDao);
     const result: IHttpData = {
       code: 0,

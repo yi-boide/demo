@@ -4,14 +4,14 @@
  * @Autor: boide gui
  * @Date: 2021-01-06 11:43:52
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-06 13:51:48
+ * @LastEditTime: 2021-01-07 17:37:49
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as moment from 'moment';
 import { Repository } from 'typeorm';
 import { Config } from './config.entity';
-import { configDao } from './config.entityDao';
+import { ConfigDao } from './config.dao';
 
 @Injectable()
 export class ConfigService {
@@ -32,7 +32,7 @@ export class ConfigService {
   }
 
   // 创建配置信息
-  async add(data: configDao) {
+  async add(data: ConfigDao) {
     const configData = new Config();
     configData.websiteName = data.websiteName;
     configData.logo = data.logo;
@@ -43,7 +43,7 @@ export class ConfigService {
   }
 
   // 修改配置信息
-  async update(data: configDao) {
+  async update(data: ConfigDao) {
     const configData = await this.getById(data.id);
     configData.websiteName = data.websiteName;
     configData.logo = data.logo;

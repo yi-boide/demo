@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2020-12-31 13:15:53
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-06 16:58:54
+ * @LastEditTime: 2021-01-07 17:45:44
  */
 import {
   Controller,
@@ -14,15 +14,10 @@ import {
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 // swagger的展示配置
-import { ApiTags, ApiProperty, ApiConsumes, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { UploadService } from './upload.service';
+import { UploadDao } from './upload.dao';
 import { IHttpData } from '../../utils/relust';
-
-class FilesUploadDto {
-  // swagger配置项
-  @ApiProperty({ type: 'array', items: { type: 'string', format: 'binary' } })
-  file: any[];
-}
 
 // swagger该模块的标题
 @ApiTags('文件接口')
@@ -39,7 +34,7 @@ export class UploadController {
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: '选择文件',
-    type: FilesUploadDto,
+    type: UploadDao,
   })
   async UploadedFile(@UploadedFiles() files): Promise<IHttpData> {
     // 接口严格要求以这个形式返回给前端
