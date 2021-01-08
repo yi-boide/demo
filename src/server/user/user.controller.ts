@@ -4,11 +4,11 @@
  * @Autor: boide gui
  * @Date: 2020-12-30 16:09:46
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-07 17:40:12
+ * @LastEditTime: 2021-01-08 10:40:52
  */
 import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
 import { UserService } from './user.service';
-import { ApiTags, ApiParam, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiParam, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { IHttpData } from '../../utils/relust';
 import { UserDao } from './user.dao';
 
@@ -18,6 +18,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   // 查询用户信息
+  @ApiOperation({ summary: '查询用户信息' })
   @Get('list')
   async findAll(): Promise<IHttpData> {
     const data: any = await this.userService.findAll();
@@ -30,6 +31,7 @@ export class UserController {
   }
 
   // 根据id用户信息
+  @ApiOperation({ summary: '根据id用户信息' })
   @Get(':id')
   @ApiParam({
     name: 'id',
@@ -46,6 +48,7 @@ export class UserController {
   }
 
   // 新增用户信息
+  @ApiOperation({ summary: '新增用户信息' })
   @Post('add')
   @ApiBody({ type: UserDao })
   async addUser(@Body() userData: UserDao): Promise<IHttpData> {
@@ -59,6 +62,7 @@ export class UserController {
   }
 
   // 修改用户信息
+  @ApiOperation({ summary: '修改用户信息' })
   @Post('update')
   async updateUser(@Body() userData: UserDao): Promise<IHttpData> {
     this.userService.update(userData);
@@ -71,6 +75,7 @@ export class UserController {
   }
 
   // 删除用户用户信息
+  @ApiOperation({ summary: '删除用户用户信息' })
   @Delete(':id')
   @ApiParam({
     name: 'id',

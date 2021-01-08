@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2020-12-31 13:15:53
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-07 17:45:44
+ * @LastEditTime: 2021-01-08 10:41:36
  */
 import {
   Controller,
@@ -14,7 +14,7 @@ import {
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 // swagger的展示配置
-import { ApiTags, ApiConsumes, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiConsumes, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { UploadService } from './upload.service';
 import { UploadDao } from './upload.dao';
 import { IHttpData } from '../../utils/relust';
@@ -26,6 +26,7 @@ export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
 
   // 支持上传多个文件
+  @ApiOperation({ summary: '上传文件，支持上传多个文件' })
   @Post()
   // @UseInterceptors(AnyFilesInterceptor())
   // AnyFilesInterceptor定义任意字段的名称

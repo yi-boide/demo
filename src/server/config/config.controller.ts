@@ -4,11 +4,11 @@
  * @Autor: boide gui
  * @Date: 2021-01-06 11:43:22
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-07 17:37:39
+ * @LastEditTime: 2021-01-08 10:42:58
  */
 import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
 import { ConfigService } from './config.service';
-import { ApiTags, ApiParam, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiParam, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { IHttpData } from '../../utils/relust';
 import { ConfigDao } from './config.dao';
 
@@ -18,6 +18,7 @@ export class ConfigController {
   constructor(private readonly configService: ConfigService) {}
 
   // 查询所有配置信息
+  @ApiOperation({ summary: '查询所有配置信息' })
   @Get('list')
   async findAll(): Promise<IHttpData> {
     const data: any = await this.configService.findAll();
@@ -30,6 +31,7 @@ export class ConfigController {
   }
 
   // 根据id查询配置信息
+  @ApiOperation({ summary: '根据id查询配置信息' })
   @Get(':id')
   @ApiParam({
     name: 'id',
@@ -46,6 +48,7 @@ export class ConfigController {
   }
 
   // 新增配置信息
+  @ApiOperation({ summary: '新增配置信息' })
   @Post('add')
   @ApiBody({ type: ConfigDao })
   async addConfig(@Body() configDao: ConfigDao): Promise<IHttpData> {
@@ -59,6 +62,7 @@ export class ConfigController {
   }
 
   // 修改配置信息
+  @ApiOperation({ summary: '修改配置信息' })
   @Post('update')
   async updateConfig(@Body() configDao: ConfigDao): Promise<IHttpData> {
     this.configService.update(configDao);
@@ -70,7 +74,8 @@ export class ConfigController {
     return result;
   }
 
-  // 删除用户用户信息
+  // 删除配置信息
+  @ApiOperation({ summary: '删除配置信息' })
   @Delete(':id')
   @ApiParam({
     name: 'id',
