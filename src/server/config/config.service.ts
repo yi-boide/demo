@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2021-01-06 11:43:52
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-07 17:37:49
+ * @LastEditTime: 2021-01-11 10:02:40
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -38,6 +38,9 @@ export class ConfigService {
     configData.logo = data.logo;
     configData.notice = data.notice;
     configData.about = data.about;
+    configData.describe = data.describe;
+    configData.phone = data.phone;
+    configData.icp = data.icp;
     configData.createTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
     this.configRepository.save(configData);
   }
@@ -49,6 +52,9 @@ export class ConfigService {
     configData.logo = data.logo;
     configData.notice = data.notice;
     configData.about = data.about;
+    configData.describe = data.describe;
+    configData.phone = data.phone;
+    configData.icp = data.icp;
     configData.updateTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
     this.configRepository.save(configData);
   }
