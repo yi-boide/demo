@@ -19,11 +19,21 @@ export class CustomController {
     name: 'pageSize',
     description: '一页数量',
   })
+  @ApiParam({
+    required: false,
+    name: 'title',
+    description: '标题',
+  })
   async findAll(
     @Param('pageNum') pageNum?: number,
     @Param('pageSize') pageSize?: number,
+    @Param('title') title?: number,
   ): Promise<IHttpData> {
-    const data: any = await this.customService.findAll(pageNum, pageSize);
+    const data: any = await this.customService.findAll(
+      pageNum,
+      pageSize,
+      title,
+    );
     return new Relust(data, 0, '获取成功');
   }
 

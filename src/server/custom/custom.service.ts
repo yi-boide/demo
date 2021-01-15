@@ -15,8 +15,15 @@ export class CustomService {
   ) {}
 
   // 获取所有信息
-  async findAll(pageNum = 1, pageSize = 10): Promise<ICommonListContainer> {
+  async findAll(
+    pageNum = 1,
+    pageSize = 10,
+    title = null,
+  ): Promise<ICommonListContainer> {
     let qb = this.customRepository.createQueryBuilder('custom');
+    if (title) {
+      qb = qb.where(title);
+    }
     qb = qb.skip(pageSize * (pageNum - 1)).take(pageSize);
     const total = await qb.getCount();
     const list = await qb.getMany();

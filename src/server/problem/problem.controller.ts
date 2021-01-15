@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2021-01-15 17:21:47
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-15 18:38:13
+ * @LastEditTime: 2021-01-15 19:12:51
  */
 import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
 import { ProblemService } from './problem.service';
@@ -27,11 +27,21 @@ export class ProblemController {
     name: 'pageSize',
     description: '一页数量',
   })
+  @ApiParam({
+    required: false,
+    name: 'title',
+    description: '标题',
+  })
   async findAll(
     @Param('pageNum') pageNum?: number,
     @Param('pageSize') pageSize?: number,
+    @Param('title') title?: number,
   ): Promise<IHttpData> {
-    const data: any = await this.problemService.findAll(pageNum, pageSize);
+    const data: any = await this.problemService.findAll(
+      pageNum,
+      pageSize,
+      title,
+    );
     return new Relust(data, 0, '获取成功');
   }
 
