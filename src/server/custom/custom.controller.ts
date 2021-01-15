@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
 import { CustomService } from './custom.service';
 import { ApiTags, ApiParam, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { IHttpData } from '../../utils/relust';
+import { IHttpData, Relust } from '../../utils/relust';
 import { CustomDao } from './custom.dao';
 
 @ApiTags('自定义页面接口')
@@ -24,12 +24,7 @@ export class CustomController {
     @Param('pageSize') pageSize?: number,
   ): Promise<IHttpData> {
     const data: any = await this.customService.findAll(pageNum, pageSize);
-    const result: IHttpData = {
-      code: 0,
-      data,
-      msg: '获取成功',
-    };
-    return result;
+    return new Relust(data, 0, '获取成功');
   }
 
   @ApiOperation({ summary: '根据id查询自定义页面信息' })
@@ -40,12 +35,7 @@ export class CustomController {
   })
   async getById(@Param('id') id?: number): Promise<IHttpData> {
     const data: any = await this.customService.getById(id);
-    const result: IHttpData = {
-      code: 0,
-      data,
-      msg: '获取成功',
-    };
-    return result;
+    return new Relust(data, 0, '获取成功');
   }
 
   @ApiOperation({ summary: '新增自定义页面信息' })
@@ -53,24 +43,14 @@ export class CustomController {
   @ApiBody({ type: CustomDao })
   async addCustom(@Body() customDao: CustomDao): Promise<IHttpData> {
     this.customService.add(customDao);
-    const result: IHttpData = {
-      code: 0,
-      data: null,
-      msg: '新增成功',
-    };
-    return result;
+    return new Relust(null, 0, '新增成功');
   }
 
   @ApiOperation({ summary: '修改自定义页面信息' })
   @Post('update')
   async updateCustom(@Body() customDao: CustomDao): Promise<IHttpData> {
     this.customService.update(customDao);
-    const result: IHttpData = {
-      code: 0,
-      data: null,
-      msg: '修改成功',
-    };
-    return result;
+    return new Relust(null, 0, '修改成功');
   }
 
   @ApiOperation({ summary: '删除自定义页面信息' })
@@ -81,11 +61,6 @@ export class CustomController {
   })
   async deleteCustom(@Param('id') id: number): Promise<IHttpData> {
     this.customService.delete(id);
-    const result: IHttpData = {
-      code: 0,
-      data: null,
-      msg: '删除成功',
-    };
-    return result;
+    return new Relust(null, 0, '删除成功');
   }
 }

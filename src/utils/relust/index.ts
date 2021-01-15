@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2020-12-22 15:11:31
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-07 17:43:43
+ * @LastEditTime: 2021-01-15 18:35:50
  */
 export interface IHttp<T = any> {
   header: any;
@@ -65,3 +65,14 @@ export interface IRulesItem {
 }
 
 export type IRules = { [key: string]: IRulesItem[] };
+
+export class Relust {
+  data: any;
+  code: number;
+  msg: string;
+  constructor(data: any = null, code = 0, msg = '') {
+    this.data = data;
+    this.code = code;
+    this.msg = msg;
+  }
+}

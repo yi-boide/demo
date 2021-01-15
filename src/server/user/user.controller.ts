@@ -4,12 +4,12 @@
  * @Autor: boide gui
  * @Date: 2020-12-30 16:09:46
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-08 10:40:52
+ * @LastEditTime: 2021-01-15 18:41:24
  */
 import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiTags, ApiParam, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { IHttpData } from '../../utils/relust';
+import { IHttpData, Relust } from '../../utils/relust';
 import { UserDao } from './user.dao';
 
 @ApiTags('用户接口')
@@ -22,12 +22,7 @@ export class UserController {
   @Get('list')
   async findAll(): Promise<IHttpData> {
     const data: any = await this.userService.findAll();
-    const result: IHttpData = {
-      code: 0,
-      data,
-      msg: '获取成功',
-    };
-    return result;
+    return new Relust(data, 0, '获取成功');
   }
 
   // 根据id用户信息
@@ -39,12 +34,7 @@ export class UserController {
   })
   async getById(@Param('id') id: number): Promise<IHttpData> {
     const data: any = await this.userService.getById(id);
-    const result: IHttpData = {
-      code: 0,
-      data,
-      msg: '获取成功',
-    };
-    return result;
+    return new Relust(data, 0, '获取成功');
   }
 
   // 新增用户信息
@@ -53,12 +43,7 @@ export class UserController {
   @ApiBody({ type: UserDao })
   async addUser(@Body() userData: UserDao): Promise<IHttpData> {
     this.userService.create(userData);
-    const result: IHttpData = {
-      code: 0,
-      data: null,
-      msg: '新增成功',
-    };
-    return result;
+    return new Relust(null, 0, '新增成功');
   }
 
   // 修改用户信息
@@ -66,12 +51,7 @@ export class UserController {
   @Post('update')
   async updateUser(@Body() userData: UserDao): Promise<IHttpData> {
     this.userService.update(userData);
-    const result: IHttpData = {
-      code: 0,
-      data: null,
-      msg: '修改成功',
-    };
-    return result;
+    return new Relust(null, 0, '修改成功');
   }
 
   // 删除用户用户信息
@@ -83,11 +63,6 @@ export class UserController {
   })
   async deleteUser(@Param('id') id: number): Promise<IHttpData> {
     this.userService.delete(id);
-    const result: IHttpData = {
-      code: 0,
-      data: null,
-      msg: '删除成功',
-    };
-    return result;
+    return new Relust(null, 0, '删除成功');
   }
 }
