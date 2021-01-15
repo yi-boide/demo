@@ -13,6 +13,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './server/user/user.module';
 import { UploadModule } from './server/upload/upload.module';
 import { ConfigModule } from './server/config/config.module';
+import { CustomModule } from './server/custom/custom.module';
+import { ProblemModule } from './server/problem/problem.module';
 @Module({
   imports: [
     // 加载连接数据库
@@ -29,6 +31,8 @@ import { ConfigModule } from './server/config/config.module';
     UserModule,
     UploadModule,
     ConfigModule,
+    CustomModule,
+    ProblemModule,
   ],
   controllers: [AppController],
 })
