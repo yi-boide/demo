@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { Repository } from 'typeorm';
 import { Custom } from './custom.entity';
 import { CustomDao } from './custom.dao';
+import { ICommonListContainer } from '../../utils/relust';
 
 @Injectable()
 export class CustomService {
@@ -14,8 +15,18 @@ export class CustomService {
   ) {}
 
   // 获取所有信息
-  async findAll(): Promise<Custom[]> {
-    return await this.customRepository.find();
+  async findAll(pageNum = 1, pageSize = 10): Promise<ICommonListContainer> {
+    let qb = this.customRepository.createQueryBuilder('custom');
+    qb = qb.skip(pageSize * (pageNum - 1)).take(pageSize);
+    const total = await qb.getCount();
+    const list = await qb.getMany();
+    return {
+      pageSize,
+      pageNum,
+      pages: Math.ceil(total / pageSize),
+      total,
+      list,
+    };
   }
 
   // 根据管理id查询信息， 默认1

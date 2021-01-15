@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2021-01-15 17:21:47
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-15 17:27:22
+ * @LastEditTime: 2021-01-15 18:14:52
  */
 import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
 import { ProblemService } from './problem.service';
@@ -19,8 +19,19 @@ export class ProblemController {
 
   @ApiOperation({ summary: '查询所有常见问题信息' })
   @Get('list')
-  async findAll(): Promise<IHttpData> {
-    const data: any = await this.problemService.findAll();
+  @ApiParam({
+    name: 'pageNum',
+    description: '页数',
+  })
+  @ApiParam({
+    name: 'pageSize',
+    description: '一页数量',
+  })
+  async findAll(
+    @Param('pageNum') pageNum?: number,
+    @Param('pageSize') pageSize?: number,
+  ): Promise<IHttpData> {
+    const data: any = await this.problemService.findAll(pageNum, pageSize);
     const result: IHttpData = {
       code: 0,
       data,

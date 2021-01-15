@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2021-01-07 11:13:36
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-15 17:14:13
+ * @LastEditTime: 2021-01-15 18:13:39
  */
 /*
  * @Descriptin:
@@ -20,7 +20,7 @@ import * as moment from 'moment';
 import { Repository } from 'typeorm';
 import { Config } from './config.entity';
 import { ConfigDao } from './config.dao';
-
+import { ICommonListContainer } from '../../utils/relust';
 @Injectable()
 export class ConfigService {
   // 使用InjectRepository装饰器并引入Repository这样就可以使用typeorm的操作了
@@ -30,8 +30,18 @@ export class ConfigService {
   ) {}
 
   // 获取所有配置信息
-  async findAll(): Promise<Config[]> {
-    return await this.configRepository.find();
+  async findAll(pageNum = 1, pageSize = 10): Promise<ICommonListContainer> {
+    let qb = this.configRepository.createQueryBuilder('config');
+    qb = qb.skip(pageSize * (pageNum - 1)).take(pageSize);
+    const total = await qb.getCount();
+    const list = await qb.getMany();
+    return {
+      pageSize,
+      pageNum,
+      pages: Math.ceil(total / pageSize),
+      total,
+      list,
+    };
   }
 
   // 根据管理id查询配置信息， 默认1

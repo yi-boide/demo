@@ -11,8 +11,19 @@ export class CustomController {
 
   @ApiOperation({ summary: '查询所有自定义页面信息' })
   @Get('list')
-  async findAll(): Promise<IHttpData> {
-    const data: any = await this.customService.findAll();
+  @ApiParam({
+    name: 'pageNum',
+    description: '页数',
+  })
+  @ApiParam({
+    name: 'pageSize',
+    description: '一页数量',
+  })
+  async findAll(
+    @Param('pageNum') pageNum?: number,
+    @Param('pageSize') pageSize?: number,
+  ): Promise<IHttpData> {
+    const data: any = await this.customService.findAll(pageNum, pageSize);
     const result: IHttpData = {
       code: 0,
       data,

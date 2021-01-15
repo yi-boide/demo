@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { Repository } from 'typeorm';
 import { Problem } from './problem.entity';
 import { ProblemDao } from './problem.dao';
+import { ICommonListContainer } from '../../utils/relust';
 
 @Injectable()
 export class ProblemService {
@@ -14,8 +15,18 @@ export class ProblemService {
   ) {}
 
   // 获取所有信息
-  async findAll(): Promise<Problem[]> {
-    return await this.problemRepository.find();
+  async findAll(pageNum = 1, pageSize = 10): Promise<ICommonListContainer> {
+    let qb = this.problemRepository.createQueryBuilder('problem');
+    qb = qb.skip(pageSize * (pageNum - 1)).take(pageSize);
+    const total = await qb.getCount();
+    const list = await qb.getMany();
+    return {
+      pageSize,
+      pageNum,
+      pages: Math.ceil(total / pageSize),
+      total,
+      list,
+    };
   }
 
   // 根据管理id查询信息， 默认1

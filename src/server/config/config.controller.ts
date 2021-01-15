@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2021-01-08 11:38:21
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-15 17:18:23
+ * @LastEditTime: 2021-01-15 18:11:32
  */
 /*
  * @Descriptin:
@@ -28,8 +28,19 @@ export class ConfigController {
   // 查询所有配置信息
   @ApiOperation({ summary: '查询所有配置信息' })
   @Get('list')
-  async findAll(): Promise<IHttpData> {
-    const data: any = await this.configService.findAll();
+  @ApiParam({
+    name: 'pageNum',
+    description: '页数',
+  })
+  @ApiParam({
+    name: 'pageSize',
+    description: '一页数量',
+  })
+  async findAll(
+    @Param('pageNum') pageNum?: number,
+    @Param('pageSize') pageSize?: number,
+  ): Promise<IHttpData> {
+    const data: any = await this.configService.findAll(pageNum, pageSize);
     const result: IHttpData = {
       code: 0,
       data,
