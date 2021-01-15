@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2020-12-30 16:51:14
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-15 17:26:08
+ * @LastEditTime: 2021-01-15 20:19:35
  */
 import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
 
@@ -22,7 +22,7 @@ export class Problem extends BaseEntity {
   describe?: string;
 
   // 常见问题描述内容
-  @Column({ type: 'varchar', name: 'content' })
+  @Column({ type: 'text', name: 'content' })
   content?: string;
 
   // 创建时间
