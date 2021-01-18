@@ -21,10 +21,20 @@ export class ProblemService {
     title = null,
   ): Promise<ICommonListContainer> {
     let qb = this.problemRepository.createQueryBuilder('problem');
+    qb = qb.select([
+      'custom.id',
+      'custom.title',
+      'custom.describe',
+      'custom.createTime',
+      'custom.updateTime',
+    ]);
     if (title) {
-      qb = qb.where(title);
+      qb = qb
+        .where('problem.title like :title')
+        .setParameters({ title: `%${title}%` });
     }
     qb = qb.skip(pageSize * (pageNum - 1)).take(pageSize);
+    qb = qb.orderBy('custom.createTime', 'DESC');
     const total = await qb.getCount();
     const list = await qb.getMany();
     return {

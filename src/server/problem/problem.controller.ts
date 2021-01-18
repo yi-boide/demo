@@ -4,11 +4,25 @@
  * @Autor: boide gui
  * @Date: 2021-01-15 17:21:47
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-15 19:12:51
+ * @LastEditTime: 2021-01-18 16:31:59
  */
-import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Body,
+  Param,
+  Query,
+} from '@nestjs/common';
 import { ProblemService } from './problem.service';
-import { ApiTags, ApiParam, ApiBody, ApiOperation } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiParam,
+  ApiQuery,
+  ApiBody,
+  ApiOperation,
+} from '@nestjs/swagger';
 import { IHttpData, Relust } from '../../utils/relust';
 import { ProblemDao } from './problem.dao';
 
@@ -19,27 +33,27 @@ export class ProblemController {
 
   @ApiOperation({ summary: '查询所有常见问题信息' })
   @Get('list')
-  @ApiParam({
+  @ApiQuery({
     name: 'pageNum',
     description: '页数',
   })
-  @ApiParam({
+  @ApiQuery({
     name: 'pageSize',
     description: '一页数量',
   })
-  @ApiParam({
+  @ApiQuery({
     required: false,
     name: 'title',
     description: '标题',
   })
   async findAll(
-    @Param('pageNum') pageNum?: number,
-    @Param('pageSize') pageSize?: number,
-    @Param('title') title?: number,
+    @Query('pageNum') pageNum?: string,
+    @Query('pageSize') pageSize?: string,
+    @Query('title') title?: string,
   ): Promise<IHttpData> {
     const data: any = await this.problemService.findAll(
-      pageNum,
-      pageSize,
+      parseInt(pageNum),
+      parseInt(pageSize),
       title,
     );
     return new Relust(data, 0, '获取成功');

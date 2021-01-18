@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2021-01-08 11:38:21
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-15 18:39:03
+ * @LastEditTime: 2021-01-18 16:34:05
  */
 /*
  * @Descriptin:
@@ -14,9 +14,23 @@
  * @LastEditors: boide gui
  * @LastEditTime: 2021-01-08 10:42:58
  */
-import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Body,
+  Param,
+  Query,
+} from '@nestjs/common';
 import { ConfigService } from './config.service';
-import { ApiTags, ApiParam, ApiBody, ApiOperation } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiParam,
+  ApiQuery,
+  ApiBody,
+  ApiOperation,
+} from '@nestjs/swagger';
 import { IHttpData, Relust } from '../../utils/relust';
 import { ConfigDao } from './config.dao';
 
@@ -28,17 +42,17 @@ export class ConfigController {
   // 查询所有配置信息
   @ApiOperation({ summary: '查询所有配置信息' })
   @Get('list')
-  @ApiParam({
+  @ApiQuery({
     name: 'pageNum',
     description: '页数',
   })
-  @ApiParam({
+  @ApiQuery({
     name: 'pageSize',
     description: '一页数量',
   })
   async findAll(
-    @Param('pageNum') pageNum?: number,
-    @Param('pageSize') pageSize?: number,
+    @Query('pageNum') pageNum?: number,
+    @Query('pageSize') pageSize?: number,
   ): Promise<IHttpData> {
     const data: any = await this.configService.findAll(pageNum, pageSize);
     return new Relust(data, 0, '获取成功');
