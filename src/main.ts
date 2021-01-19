@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2020-12-30 12:08:32
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-15 20:45:17
+ * @LastEditTime: 2021-01-19 19:16:48
  */
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -25,7 +25,7 @@ async function bootstrap() {
     '/public',
     serveStatic(join(__dirname, '../public'), {
       maxAge: '1d',
-      extensions: ['jpg', 'jpeg', 'png', 'gif'],
+      extensions: ['jpg', 'jpeg', 'png', 'gif', 'mp4'],
     }),
   );
 
