@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2020-12-30 16:51:14
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-15 20:19:25
+ * @LastEditTime: 2021-01-22 14:58:59
  */
 import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
 
@@ -22,7 +22,7 @@ export class Custom extends BaseEntity {
   describe?: string;
 
   // 自定义页面描述内容
-  @Column({ type: 'text', name: 'content' })
+  @Column({ type: 'longblob', name: 'content' })
   content?: string;
 
   // 创建时间
