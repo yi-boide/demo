@@ -4,7 +4,7 @@
  * @Autor: boide gui
  * @Date: 2020-12-30 12:08:32
  * @LastEditors: boide gui
- * @LastEditTime: 2021-01-19 19:16:48
+ * @LastEditTime: 2021-01-22 17:15:28
  */
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -31,8 +31,8 @@ async function bootstrap() {
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const bodyParser = require('body-parser');
-  app.use(bodyParser.json({ limit: '50mb' }));
-  app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+  app.use(bodyParser.json({ limit: '200mb' }));
+  app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
 
   // swagger配置
   const options = new DocumentBuilder()
