@@ -22,6 +22,7 @@ import {
   ApiQuery,
   ApiBody,
   ApiOperation,
+  ApiResponse,
 } from '@nestjs/swagger';
 import { IHttpData, Relust } from '../../utils/relust';
 import { ProblemDao } from './problem.dao';
@@ -45,6 +46,11 @@ export class ProblemController {
     required: false,
     name: 'title',
     description: '标题',
+  })
+  @ApiResponse({
+    status: 200,
+    description: '查询成功',
+    type: [ProblemDao]
   })
   async findAll(
     @Query('pageNum') pageNum?: string,

@@ -7,7 +7,6 @@
  * @LastEditTime: 2021-01-06 18:39:00
  */
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 // 子模块加载
 import { UserModule } from './server/user/user.module';
@@ -33,7 +32,6 @@ import { ProblemModule } from './server/problem/problem.module';
     ConfigModule,
     CustomModule,
     ProblemModule,
-  ],
-  controllers: [AppController],
+  ]
 })
 export class AppModule {}

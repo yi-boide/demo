@@ -6,6 +6,7 @@
  * @LastEditors: boide gui
  * @LastEditTime: 2021-01-15 18:35:50
  */
+import { ApiProperty } from '@nestjs/swagger';
 export interface IHttp<T = any> {
   header: any;
   config: any;
@@ -75,4 +76,13 @@ export class Relust {
     this.code = code;
     this.msg = msg;
   }
+}
+
+export class RelustFull<T = any> {
+  @ApiProperty({ description: '返回数据' })
+  data: T;
+  @ApiProperty({ description: '状态码' })
+  code: number;
+  @ApiProperty({ description: '消息' })
+  msg: string;
 }

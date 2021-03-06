@@ -30,6 +30,7 @@ import {
   ApiQuery,
   ApiBody,
   ApiOperation,
+  ApiResponse,
 } from '@nestjs/swagger';
 import { IHttpData, Relust } from '../../utils/relust';
 import { ConfigDao } from './config.dao';
@@ -49,6 +50,11 @@ export class ConfigController {
   @ApiQuery({
     name: 'pageSize',
     description: '一页数量',
+  })
+  @ApiResponse({
+    status: 200,
+    description: '查询成功',
+    type: [ConfigDao]
   })
   async findAll(
     @Query('pageNum') pageNum?: number,
