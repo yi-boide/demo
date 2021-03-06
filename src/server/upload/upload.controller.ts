@@ -16,7 +16,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 // swagger的展示配置
 import { ApiTags, ApiConsumes, ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { UploadService } from './upload.service';
-import { UploadDao } from './upload.dao';
+import { UploadDao, UploadsDao } from './upload.dao';
 import { IHttpData } from '../../utils/relust';
 
 // swagger该模块的标题
@@ -25,7 +25,7 @@ import { IHttpData } from '../../utils/relust';
 @ApiResponse({
   status: 200,
   description: '查询成功',
-  type: [UploadDao]
+  type: UploadsDao
 })
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}

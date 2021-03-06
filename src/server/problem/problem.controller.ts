@@ -50,7 +50,7 @@ export class ProblemController {
   @ApiResponse({
     status: 200,
     description: '查询成功',
-    type: [ProblemDao]
+    type: ProblemDao
   })
   async findAll(
     @Query('pageNum') pageNum?: string,

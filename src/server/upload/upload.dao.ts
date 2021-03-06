@@ -13,3 +13,25 @@ export class UploadDao {
   @ApiProperty({ type: 'array', items: { type: 'string', format: 'binary' } })
   file: any[];
 }
+export class UploadsDao {
+  @ApiProperty({ description: '文件id' })
+  id: number;
+
+  @ApiProperty({ description: '文件名称' })
+  name: string;
+
+  @ApiProperty({ description: '文件相对路径' })
+  path: string;
+
+  @ApiProperty({ description: '文件路径' })
+  pathUrl?: string;
+
+  @ApiProperty({ description: '文件大小' })
+  size?: number;
+
+  @ApiProperty({ description: '文件类型' })
+  type?: string;
+
+  @ApiProperty({ description: '文件创建时间' })
+  createTime: string;
+}

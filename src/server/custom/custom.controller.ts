@@ -42,7 +42,7 @@ export class CustomController {
   @ApiResponse({
     status: 200,
     description: '查询成功',
-    type: [CustomDao]
+    type: CustomDao
   })
   async findAll(
     @Query('pageNum') pageNum?: string,

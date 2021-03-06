@@ -54,7 +54,7 @@ export class ConfigController {
   @ApiResponse({
     status: 200,
     description: '查询成功',
-    type: [ConfigDao]
+    type: ConfigDao
   })
   async findAll(
     @Query('pageNum') pageNum?: number,

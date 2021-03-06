@@ -22,7 +22,7 @@ export class UserController {
   @ApiResponse({
     status: 200,
     description: '查询成功',
-    type: [UserDao]
+    type: UserDao
   })
   @Get('list')
   async findAll(): Promise<IHttpData> {
