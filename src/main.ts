@@ -12,9 +12,13 @@ import { AppModule } from './app.module';
 import * as serveStatic from 'serve-static';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import { logger } from './common/middleware/logger.middleware'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  // 全局使用中间件
+  app.use(logger)
 
   // 处理跨域
   app.enableCors();
